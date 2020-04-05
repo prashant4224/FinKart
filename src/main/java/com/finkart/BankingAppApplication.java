@@ -8,6 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * @author PRASHANT
+ * The Class BankingAppApplication.
+ */
 @SpringBootApplication
 public class BankingAppApplication implements CommandLineRunner{
 
@@ -22,7 +26,6 @@ public class BankingAppApplication implements CommandLineRunner{
 		String[] allBeanNames = applicationContext.getBeanDefinitionNames();
 		Arrays.sort(allBeanNames);
 		for (String beanName : allBeanNames) {
-			System.out.println("beanName: "+beanName);
 		}
 	}
 

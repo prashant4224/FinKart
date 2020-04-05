@@ -2,15 +2,29 @@ package com.finkart.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.finkart.entity.Customer;
+import com.finkart.repository.CustomerRepository;
 
-public interface CustomerService {
-	
-	public List<Customer> getCustomerList();
-	
-	//public void addCustomer();
+/**
+ * @author PRASHANT
+ * 
+ * The Class CustomerService.
+ */
+@Service
+public class CustomerService implements ICustomerService{
 
-	//public void updateCustomer();
+	@Autowired
+	private CustomerRepository customerRepository;
 	
-
+	public List<Customer> getCustomerList(){
+		return customerRepository.findAll(); 
+	}
+	
+	public Customer createCustomer(Customer cust) {
+//		System.out.println(cust.toString());
+		return customerRepository.save(cust);
+	}
 }
