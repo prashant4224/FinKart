@@ -17,7 +17,7 @@ public class User {
 	@Id
 	@GeneratedValue
 	@Column
-	private Long id;
+	private long id;
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -43,11 +43,11 @@ public class User {
 	@Column(name="pin_code")
 	private String pinCode;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

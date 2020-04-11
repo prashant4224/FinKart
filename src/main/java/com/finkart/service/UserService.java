@@ -1,11 +1,11 @@
 package com.finkart.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.finkart.entity.PartialData;
 import com.finkart.entity.User;
 import com.finkart.exception.ApiResponse;
 import com.finkart.exception.DataNotFoundException;
@@ -44,40 +44,40 @@ public class UserService implements IUserService {
 		return UserRepository.save(cust);
 	}
 
-	public User partialUpdate(Map<String, Object> cust, Long id) throws DataNotFoundException, NameNotFoundException {
+	public User partialUpdate(PartialData cust, long id) throws DataNotFoundException, NameNotFoundException {
 		User User = UserRepository.findById(id).orElseThrow(() -> new DataNotFoundException(
 				new ApiResponse("User not found", Constants.DATA_NOT_FOUND)));
-		if (cust.containsKey("firstName")) {
-			User.setFirstName((String) cust.get("firstName"));
+		if (cust.getUpdates().containsKey("firstName")) {
+			User.setFirstName((String) cust.getUpdates().get("firstName"));
 		} else {
 			throw new NameNotFoundException(new ApiResponse("Name is not valid", Constants.DATA_NOT_FOUND));
 		}
-		if (cust.containsKey("lastName")) {
-			User.setLastName((String) cust.get("lastName"));
+		if (cust.getUpdates().containsKey("lastName")) {
+			User.setLastName((String) cust.getUpdates().get("lastName"));
 		}
-		if (cust.containsKey("address1")) {
-			User.setAddress1((String) cust.get("address1"));
+		if (cust.getUpdates().containsKey("address1")) {
+			User.setAddress1((String) cust.getUpdates().get("address1"));
 		}
-		if (cust.containsKey("address2")) {
-			User.setAddress2((String) cust.get("address2"));
+		if (cust.getUpdates().containsKey("address2")) {
+			User.setAddress2((String) cust.getUpdates().get("address2"));
 		}
-		if (cust.containsKey("address3")) {
-			User.setAddress3((String) cust.get("address3"));
+		if (cust.getUpdates().containsKey("address3")) {
+			User.setAddress3((String) cust.getUpdates().get("address3"));
 		}
-		if (cust.containsKey("city")) {
-			User.setCity((String) cust.get("city"));
+		if (cust.getUpdates().containsKey("city")) {
+			User.setCity((String) cust.getUpdates().get("city"));
 		}
-		if (cust.containsKey("state")) {
-			User.setState((String) cust.get("state"));
+		if (cust.getUpdates().containsKey("state")) {
+			User.setState((String) cust.getUpdates().get("state"));
 		}
-		if (cust.containsKey("pinCode")) {
-			User.setPinCode((String) cust.get("pinCode"));
+		if (cust.getUpdates().containsKey("pinCode")) {
+			User.setPinCode((String) cust.getUpdates().get("pinCode"));
 		}
 		return UserRepository.save(User);
 	}
 
 	@Override
-	public void deleteUser(Long id) {
+	public void deleteUser(long id) {
 		UserRepository.deleteById(id);
 	}
 }

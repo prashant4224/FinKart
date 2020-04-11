@@ -1,12 +1,12 @@
 package com.finkart.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finkart.entity.PartialData;
 import com.finkart.entity.User;
 import com.finkart.service.IUserService;
 
@@ -66,29 +67,30 @@ public class UserController {
 		return new ResponseEntity<List<User>>(usList, HttpStatus.OK);
 	}
 
-	@GetMapping(value="/customer/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
+	@GetMapping(value="/user/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
 	public ResponseEntity<User> getUser(@PathVariable long id){
 		User cust = userService.getUser(id);
 		return new ResponseEntity<User>(cust, HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/customer", consumes=MediaType.APPLICATION_JSON_VALUE, 
+	@PutMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
 	public ResponseEntity<User> updateUser(@RequestBody User user){
 		User cust = userService.updateUser(user);
 		return new ResponseEntity<User>(cust,HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/customer/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
+	@PutMapping(value="/user/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
-	public ResponseEntity<User> partialUpdateUser(@RequestBody Map<String, Object> updates, 
-			@PathVariable Long id) throws Exception{
+	public ResponseEntity<User> partialUpdateUser(@RequestBody PartialData updates, 
+			@PathVariable long id) throws Exception{
 		User user = userService.partialUpdate(updates, id);
 		return new ResponseEntity<User>(user,HttpStatus.OK);		
 	}
 	
-	public ResponseEntity<User> deleteUser(@PathVariable Long id){
+	@DeleteMapping(value="/user/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> deleteUser(@PathVariable long id){
 		userService.deleteUser(id);
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
