@@ -3,14 +3,14 @@ package com.finkart.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.finkart.entity.Customer;
+import com.finkart.entity.User;
 
 /**
  * @author PRASHANT
  * 
  * The Class CustomerRequestDto.
  */
-public class CustomerRequestDto {
+public class UserRequestDto {
 
 	private Long id;
 	private String firstName;
@@ -82,10 +82,10 @@ public class CustomerRequestDto {
 				+ ", pinCode=" + pinCode + "]";
 	}
 	
-	public static List<CustomerRequestDto> convertEntityToDto(List<Customer> custList){
-		List<CustomerRequestDto> requestDtoList = new ArrayList<>();
-		for (Customer customer : custList) {
-			CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+	public static List<UserRequestDto> convertEntityToDto(List<User> custList){
+		List<UserRequestDto> requestDtoList = new ArrayList<>();
+		for (User customer : custList) {
+			UserRequestDto customerRequestDto = new UserRequestDto();
 			customerRequestDto.setId(customer.getId());
 			customerRequestDto.setFirstName(customer.getFirstName());
 			customerRequestDto.setLastName(customer.getLastName());
@@ -100,10 +100,10 @@ public class CustomerRequestDto {
 		return requestDtoList;
 	}
 	
-	public static List<Customer> convertDtoToEntity(List<CustomerRequestDto> respDtoList){
-		List<Customer> custList = new ArrayList<>();
-		for (CustomerRequestDto customerReq : respDtoList) {
-			Customer customer = new Customer();
+	public static List<User> convertDtoToEntity(List<UserRequestDto> respDtoList){
+		List<User> custList = new ArrayList<>();
+		for (UserRequestDto customerReq : respDtoList) {
+			User customer = new User();
 			customer.setId(customerReq.getId());
 			customer.setFirstName(customerReq.getFirstName());
 			customer.setLastName(customerReq.getLastName());

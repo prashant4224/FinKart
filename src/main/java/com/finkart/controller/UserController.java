@@ -15,82 +15,82 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.finkart.entity.Customer;
-import com.finkart.service.ICustomerService;
+import com.finkart.entity.User;
+import com.finkart.service.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author PRASHANT
  * 
- *         The Class CustomerController.
+ *         The Class UserController.
  */
 @RestController
-@RequestMapping("/customer/v1")
+@RequestMapping("/user/v1")
 @Slf4j
-public class CustomerController {
+public class UserController {
 
 	@Autowired
-	private ICustomerService customerService;
+	private IUserService userService;
 
 	/**
-	 * All customers.
+	 * All users.
 	 *
 	 * @return the response entity
 	 */
-	@GetMapping("/cust-list")
-	public ResponseEntity<List<Customer>> allCustomers() {
-		List<Customer> custList = customerService.getCustomerList();
+	@GetMapping("/user-list")
+	public ResponseEntity<List<User>> allUsers() {
+		List<User> userList = userService.getUserList();
 		
-		log.info("allCustomers :: {} ", custList.toString());
-		return new ResponseEntity<List<Customer>>(custList, HttpStatus.OK);
+		log.info("allUsers :: {} ", userList.toString());
+		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	}
 
 	/**
-	 * Creates the customer.
+	 * Creates the User.
 	 *
-	 * @param cust the cust
+	 * @param cust the user
 	 * @return the response entity
 	 */
 	@PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
-	public ResponseEntity<Customer> createCustomer(@RequestBody Customer cust) {
-		Customer customer = customerService.createCustomer(cust);
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+	public ResponseEntity<User> createUser(@RequestBody User user) {
+		User us = userService.createUser(user);
+		return new ResponseEntity<User>(us, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/bulk-create", consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
-	public ResponseEntity<List<Customer>> bulkCreateCustomer(@RequestBody List<Customer> custList) {
-		List<Customer> customerList = customerService.bulkCreateCustomer(custList);
-		return new ResponseEntity<List<Customer>>(customerList, HttpStatus.OK);
+	public ResponseEntity<List<User>> bulkCreateUser(@RequestBody List<User> userList) {
+		List<User> usList = userService.bulkCreateUser(userList);
+		return new ResponseEntity<List<User>>(usList, HttpStatus.OK);
 	}
 
 	@GetMapping(value="/customer/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
-	public ResponseEntity<Customer> getCustomer(@PathVariable long id){
-		Customer cust = customerService.getCustomer(id);
-		return new ResponseEntity<Customer>(cust, HttpStatus.OK);
+	public ResponseEntity<User> getUser(@PathVariable long id){
+		User cust = userService.getUser(id);
+		return new ResponseEntity<User>(cust, HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/customer", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
-	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-		Customer cust = customerService.updateCustomer(customer);
-		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
+	public ResponseEntity<User> updateUser(@RequestBody User user){
+		User cust = userService.updateUser(user);
+		return new ResponseEntity<User>(cust,HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/customer/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
-	public ResponseEntity<Customer> partialUpdateCustomer(@RequestBody Map<String, Object> updates, 
+	public ResponseEntity<User> partialUpdateUser(@RequestBody Map<String, Object> updates, 
 			@PathVariable Long id) throws Exception{
-		Customer cust = customerService.partialUpdate(updates, id);
-		return new ResponseEntity<Customer>(cust,HttpStatus.OK);		
+		User user = userService.partialUpdate(updates, id);
+		return new ResponseEntity<User>(user,HttpStatus.OK);		
 	}
 	
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable Long id){
-		customerService.deleteCustomer(id);
-		return new ResponseEntity<Customer>(HttpStatus.OK);
+	public ResponseEntity<User> deleteUser(@PathVariable Long id){
+		userService.deleteUser(id);
+		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 
 	

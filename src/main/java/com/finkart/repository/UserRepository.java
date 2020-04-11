@@ -2,7 +2,7 @@ package com.finkart.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.finkart.entity.Customer;
+import com.finkart.entity.User;
 
 /**
  * @author PRASHANT
@@ -27,6 +27,6 @@ import com.finkart.entity.Customer;
  * meant to be extended by your own repository interfaces, and those are the
  * ones that should be picked up.
  */
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }
