@@ -71,7 +71,6 @@ public class UserServiceTest {
 	@Test
 	public void getUserTest() {
 		User user = spy(User.class);
-		//PowerMockito.when(userService.ge)
 		when(userRepository.getOne(2l)).thenReturn(user);
 		
 		User us = userService.getUser(2);

@@ -42,6 +42,9 @@ public class User {
 	
 	@Column(name="pin_code")
 	private String pinCode;
+	@Column(unique=true)
+	private String username;
+	private String password;
 
 	public long getId() {
 		return id;
@@ -115,6 +118,22 @@ public class User {
 		this.pinCode = pinCode;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -124,7 +143,7 @@ public class User {
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address1=" + address1
 				+ ", address2=" + address2 + ", address3=" + address3 + ", city=" + city + ", state=" + state
-				+ ", pinCode=" + pinCode + "]";
+				+ ", pinCode=" + pinCode + ", username=" + username + "]";
 	}
 
 	

@@ -10,7 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
+import static org.powermock.api.mockito.PowerMockito.doReturn;
+import static org.powermock.api.mockito.PowerMockito.spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -30,16 +31,16 @@ public class SampleServiceTest {
 	}
 	
 	@Test
-	public void userDetailsTest() throws Exception{
+	public void userDetailsTest() throws Exception {
 		// When
-		SampleService spy = PowerMockito.spy(sampleService);
+		SampleService spy = spy(sampleService);
 		List<User> usrList = new ArrayList<User>();
 		User user = new User();
 		user.setId(1l);
 		user.setFirstName("test");
 		usrList.add(user);
 		
-		PowerMockito.doReturn(usrList).when(spy, "userList");
+		doReturn(usrList).when(spy, "userList");
 
 		//Then
 		List<User> uList = spy.userDetails();
