@@ -20,6 +20,12 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ApiResponse>(new ApiResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
 	}
 
+	@ExceptionHandler(value = UnauthorizedException.class)
+	public ResponseEntity<ApiResponse> handleUnauthorizedException(UnauthorizedException ex) {
+		ApiResponse resp = ex.getApiResponse();
+		return new ResponseEntity<ApiResponse>(new ApiResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+	}
+	
 	@ExceptionHandler(value = Exception.class)
 	public ResponseEntity<ApiResponse> handleException(Exception ex) {
 		return new ResponseEntity<ApiResponse>(new ApiResponse("Input data Invalid", "000"), HttpStatus.OK);
