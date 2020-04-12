@@ -37,7 +37,8 @@ public class UserService implements IUserService {
 	}
 
 	public User getUser(long id) {
-		return UserRepository.getOne(id);
+		long userId= getUserInfo();
+		return UserRepository.getOne(userId);
 	}
 
 	public User updateUser(User cust) {
@@ -79,5 +80,10 @@ public class UserService implements IUserService {
 	@Override
 	public void deleteUser(long id) {
 		UserRepository.deleteById(id);
+	}
+	
+	private long getUserInfo() {
+		long userId = 1;
+		return userId;
 	}
 }
