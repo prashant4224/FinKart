@@ -17,7 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.finkart.entity.PartialData;
 import com.finkart.entity.User;
 import com.finkart.exception.DataNotFoundException;
 import com.finkart.exception.NameNotFoundException;
@@ -33,6 +32,9 @@ public class UserServiceTest {
 	
 	@Mock
 	UserRepository userRepository;
+	
+	@Mock
+	Map<Object, Object> map;
 	
 	@Test
 	public void allUsersTest() {
@@ -88,9 +90,9 @@ public class UserServiceTest {
 	
 	@Test
 	public void partialUpdateUserTest() throws DataNotFoundException, NameNotFoundException {
-		PartialData partiData = spy(PartialData.class);
+		//PartialData partiData = spy(PartialData.class);
 		User user = spy(User.class);
-		Map<String, Object> map = new HashMap<>();
+		Map<Object, Object> map = new HashMap<>();
 		map.put("id", 1);
 		map.put("firstName", "test");
 		map.put("lastName", "last");
@@ -102,30 +104,30 @@ public class UserServiceTest {
 		map.put("pinCode", "last");
 		
 		when(userRepository.findById(1l)).thenReturn(Optional.of(user));
-		partiData.setUpdates(map);
+		//partiData.setUpdates(map);
 		when(userRepository.save(user)).thenReturn(user);
 		
-		User us = userService.partialUpdate(partiData, 1);
+		User us = userService.partialUpdate(map, (long)1);
 		assertEquals(user, us);
 	}
 	
 	@Test(expected=DataNotFoundException.class)
 	public void partialUpdateDataNotFoundExceptionTest() throws DataNotFoundException, NameNotFoundException {
-		PartialData partiData = spy(PartialData.class);
+		//PartialData partiData = spy(PartialData.class);
 		User user = spy(User.class);
 		List<User> userList = new ArrayList<>();
 		userList.add(user);
 		//when(userRepository.save(user)).thenReturn(user);
 		
-		User us = userService.partialUpdate(partiData, (long)2);
+		User us = userService.partialUpdate(map, (long)2);
 		//assertEquals(user, us);
 	}
 
 	@Test(expected=NameNotFoundException.class)
 	public void partialUpdateNameNotFoundExceptionTest() throws DataNotFoundException, NameNotFoundException {
-		PartialData partiData = spy(PartialData.class);
+		//PartialData partiData = spy(PartialData.class);
 		User user = spy(User.class);
-		Map<String, Object> map = new HashMap<>();
+		map = new HashMap<>();
 		map.put("id", 1);
 		map.put("", "test");
 		map.put("lastName", "last");
@@ -136,10 +138,10 @@ public class UserServiceTest {
 		map.put("state", "test");
 		map.put("pinCode", "last");
 		when(userRepository.findById((long)1)).thenReturn(Optional.of(user));
-		partiData.setUpdates(map);
+		//partiData.setUpdates(map);
 		//when(userRepository.save(user)).thenReturn(user);
 		
-		User us = userService.partialUpdate(partiData, 1);
+		User us = userService.partialUpdate(map, 1);
 		assertEquals(user, us);
 	}
 	

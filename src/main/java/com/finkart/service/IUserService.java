@@ -1,8 +1,8 @@
 package com.finkart.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.finkart.entity.PartialData;
 import com.finkart.entity.User;
 
 /**
@@ -21,7 +21,7 @@ public interface IUserService {
 	
 	public User getUser(long id);
 	
-	public User partialUpdate(PartialData cust, long id) throws Exception;
+	public User partialUpdate(Map<Object, Object> fields, long id);
 	
 	public void deleteUser(long id);
 	

@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,8 @@ public class UserControllerTest {
 	
 	@Mock
 	UserService userService;
+	@Mock
+	Map<Object, Object> partiData;
 	
 	@Test
 	public void allUsersTest() {
@@ -82,7 +85,7 @@ public class UserControllerTest {
 	
 	@Test
 	public void partialUpdateUserTest() throws Exception {
-		PartialData partiData = spy(PartialData.class);
+		//Map<Object, Object> partiData;// = spy(PartialData.class);
 		User user = spy(User.class);
 		List<User> userList = new ArrayList<>();
 		userList.add(user);
