@@ -40,7 +40,7 @@ public class UserController {
 	 *
 	 * @return the response entity
 	 */
-	@GetMapping("/user-list")
+	@GetMapping("/list")
 	public ResponseEntity<List<User>> allUsers() {
 		List<User> userList = userService.getUserList();
 		
@@ -68,7 +68,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(usList, HttpStatus.OK);
 	}
 
-	@GetMapping(value="/user/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
+	@GetMapping(value="/{id}", consumes=MediaType.APPLICATION_JSON_VALUE, 
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
 	public ResponseEntity<User> getUser(@PathVariable long id){
 		User cust = userService.getUser(id);

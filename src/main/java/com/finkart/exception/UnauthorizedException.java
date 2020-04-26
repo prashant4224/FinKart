@@ -11,14 +11,14 @@ public class UnauthorizedException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 5347317250438462979L;
 
-	private ApiResponse apiResponse;
+	private ErrorResponse errorResponse;
 	
-	public UnauthorizedException(ApiResponse apiResponse) {
-		this.apiResponse = apiResponse;
+	public UnauthorizedException(ErrorResponse errorResponse) {
+		this.errorResponse = errorResponse;
 	}
 	
-	public ApiResponse getApiResponse() {
-		return apiResponse;
+	public ErrorResponse getErrorResponse() {
+		return errorResponse;
 	}
 	
 }

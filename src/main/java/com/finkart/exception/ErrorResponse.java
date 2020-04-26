@@ -1,12 +1,12 @@
 package com.finkart.exception;
 
-public class ApiResponse {
+public class ErrorResponse {
 
 	private String message;
 	private String ststusCode;
 	
 	
-	public ApiResponse(String message, String ststusCode) {
+	public ErrorResponse(String message, String ststusCode) {
 		super();
 		this.message = message;
 		this.ststusCode = ststusCode;

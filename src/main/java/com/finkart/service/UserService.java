@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import com.finkart.entity.User;
-import com.finkart.exception.ApiResponse;
+import com.finkart.exception.ErrorResponse;
 import com.finkart.exception.DataNotFoundException;
 import com.finkart.repository.UserRepository;
 import com.finkart.util.Constants;
@@ -49,7 +49,7 @@ public class UserService implements IUserService {
 	public User partialUpdate(Map<Object, Object> fields, long id) {
 		
 		User user = userRepository.findById(id).orElseThrow(() -> new DataNotFoundException(
-				new ApiResponse("User not found", Constants.DATA_NOT_FOUND)));
+				new ErrorResponse("User not found", Constants.DATA_NOT_FOUND)));
 		System.out.println("user: "+user);
 		
 		fields.forEach((k, v) -> {

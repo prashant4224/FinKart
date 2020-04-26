@@ -28,9 +28,9 @@ public class BankingAppApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		String[] allBeanNames = applicationContext.getBeanDefinitionNames();
 		Arrays.sort(allBeanNames);
-		for (String beanName : allBeanNames) {
+		/*for (String beanName : allBeanNames) {
 			log.info("beanName: ", beanName);
-		}
+		}*/
 	}
 
 }

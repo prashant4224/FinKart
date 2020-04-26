@@ -12,15 +12,15 @@ public class NameNotFoundException extends Exception{
 	 */
 	private static final long serialVersionUID = -1538705864173056513L;
 	
-	private ApiResponse apiResponse;
+	private ErrorResponse errorResponse;
 	
-	public NameNotFoundException(ApiResponse apiResponse) {
+	public NameNotFoundException(ErrorResponse errorResponse) {
 		super();
-		this.apiResponse=apiResponse;
+		this.errorResponse=errorResponse;
 	}
 	
-	public ApiResponse getApiResponse() {
-		return apiResponse;
+	public ErrorResponse getErrorResponse() {
+		return errorResponse;
 	}
 
 	

@@ -12,15 +12,15 @@ public class DataNotFoundException extends RuntimeException{
 	 */
 	private static final long serialVersionUID = -1538705864173056513L;
 	
-	private ApiResponse apiResponse;
+	private ErrorResponse errorResponse;
 	
-	public DataNotFoundException(ApiResponse apiResponse) {
+	public DataNotFoundException(ErrorResponse errorResponse) {
 		super();
-		this.apiResponse=apiResponse;
+		this.errorResponse=errorResponse;
 	}
 	
-	public ApiResponse getApiResponse() {
-		return apiResponse;
+	public ErrorResponse getErrorResponse() {
+		return errorResponse;
 	}
 
 	

@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = DataNotFoundException.class)
-	public ResponseEntity<ApiResponse> handleDataNotFoundException(DataNotFoundException ex) {
-		ApiResponse resp = ex.getApiResponse();
-		return new ResponseEntity<ApiResponse>(new ApiResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+	public ResponseEntity<ErrorResponse> handleDataNotFoundException(DataNotFoundException ex) {
+		ErrorResponse resp = ex.getErrorResponse();
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
 	}
 
 	@ExceptionHandler(value = NameNotFoundException.class)
-	public ResponseEntity<ApiResponse> handleNameNotFoundException(NameNotFoundException ex) {
-		ApiResponse resp = ex.getApiResponse();
-		return new ResponseEntity<ApiResponse>(new ApiResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+	public ResponseEntity<ErrorResponse> handleNameNotFoundException(NameNotFoundException ex) {
+		ErrorResponse resp = ex.getErrorResponse();
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
 	}
 
 	@ExceptionHandler(value = UnauthorizedException.class)
-	public ResponseEntity<ApiResponse> handleUnauthorizedException(UnauthorizedException ex) {
-		ApiResponse resp = ex.getApiResponse();
-		return new ResponseEntity<ApiResponse>(new ApiResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+	public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException ex) {
+		ErrorResponse resp = ex.getErrorResponse();
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
 	}
 	
 	@ExceptionHandler(value = Exception.class)
-	public ResponseEntity<ApiResponse> handleException(Exception ex) {
-		return new ResponseEntity<ApiResponse>(new ApiResponse("Input data Invalid", "000"), HttpStatus.OK);
+	public ResponseEntity<ErrorResponse> handleException(Exception ex) {
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse("Input data Invalid", "000"), HttpStatus.OK);
 	}
 }

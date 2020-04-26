@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 
 import com.finkart.entity.User;
-import com.finkart.exception.ApiResponse;
+import com.finkart.exception.ErrorResponse;
 import com.finkart.exception.UnauthorizedException;
 import com.finkart.repository.UserRepository;
 import com.finkart.util.Constants;
@@ -28,15 +28,15 @@ public class AuthenticationService implements IAuthenticationService {
 
 				User user = userRepository.findByUsernameAndPassword(usernameAndPassword[0], usernameAndPassword[1]);
 				if (user == null) {
-					throw new UnauthorizedException(new ApiResponse("Invalid credentials", Constants.UNAUTHORIZED));
+					throw new UnauthorizedException(new ErrorResponse("Invalid credentials", Constants.UNAUTHORIZED));
 				} else {
 					return user;
 				}
 			} else {
-				throw new UnauthorizedException(new ApiResponse("Invalid credentials", Constants.UNAUTHORIZED));
+				throw new UnauthorizedException(new ErrorResponse("Invalid credentials", Constants.UNAUTHORIZED));
 			}
 		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) {
-			throw new UnauthorizedException(new ApiResponse("Invalid credentials", Constants.UNAUTHORIZED));
+			throw new UnauthorizedException(new ErrorResponse("Invalid credentials", Constants.UNAUTHORIZED));
 		}
 	}
 }
