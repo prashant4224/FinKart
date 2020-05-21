@@ -97,11 +97,7 @@ public class UserServiceTest {
 		map.put("firstName", "test");
 		map.put("lastName", "last");
 		map.put("address1", "test");
-		map.put("address2", "last");
-		map.put("address3", "test");
 		map.put("city", "last");
-		map.put("state", "test");
-		map.put("pinCode", "last");
 		
 		when(userRepository.findById(1l)).thenReturn(Optional.of(user));
 		//partiData.setUpdates(map);
@@ -123,28 +119,6 @@ public class UserServiceTest {
 		//assertEquals(user, us);
 	}
 
-	@Test(expected=NameNotFoundException.class)
-	public void partialUpdateNameNotFoundExceptionTest() throws DataNotFoundException, NameNotFoundException {
-		//PartialData partiData = spy(PartialData.class);
-		User user = spy(User.class);
-		map = new HashMap<>();
-		map.put("id", 1);
-		map.put("", "test");
-		map.put("lastName", "last");
-		map.put("address1", "test");
-		map.put("address2", "last");
-		map.put("address3", "test");
-		map.put("city", "last");
-		map.put("state", "test");
-		map.put("pinCode", "last");
-		when(userRepository.findById((long)1)).thenReturn(Optional.of(user));
-		//partiData.setUpdates(map);
-		//when(userRepository.save(user)).thenReturn(user);
-		
-		User us = userService.partialUpdate(map, 1);
-		assertEquals(user, us);
-	}
-	
 	@Test
 	public void deleteUserTest() {
 		

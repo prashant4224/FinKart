@@ -32,9 +32,7 @@ dependencies {
 	
 	compile('org.springframework.boot:spring-boot-devtools')
 	compile('mysql:mysql-connector-java')
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		//exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	compile('org.springframework.boot:spring-boot-starter-test')
 	
 	testCompile('junit:junit:4.12')
 	testCompile('org.mockito:mockito-core:3.3.0')
@@ -43,30 +41,43 @@ dependencies {
 	
 	compile('org.slf4j:slf4j-api:1.7.25')
 
-	testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '5.6.0'
-	compile group: 'io.cucumber', name: 'cucumber-core', version: '5.6.0'
-	compile group: 'io.cucumber', name: 'cucumber-java8', version: '5.6.0'
-	compile group: 'io.cucumber', name: 'cucumber-spring', version: '5.6.0'
-	compile group: 'io.cucumber', name: 'datatable', version: '3.3.1'
+	compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+	compile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+	compile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
+	compile group: 'info.cukes', name: 'cucumber-spring', version: '1.2.5'
 	
+	//testCompile group: 'io.cucumber', name: 'cucumber-java', version: '5.6.0'
+	//testCompile group: 'io.cucumber', name: 'cucumber-spring', version: '5.6.0'
+	//testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '5.6.0'
+	//testCompile group: 'io.cucumber', name: 'cucumber-core', version: '5.6.0'
+	//compile group: 'io.cucumber', name: 'datatable', version: '3.3.1'
+	compile('io.rest-assured:rest-assured:3.1.1')
+	compile('com.jayway.restassured:rest-assured:2.5.0')
+	//compile('com.google.code.gson:gson:2.8.5')
 	
+	compile('org.springframework.cloud:spring-cloud-contract-wiremock:2.0.1.RELEASE')
+	testCompile('com.atlassian.ta:wiremock-pact-generator:2.1.0')
 	
-	
-	
-	
+
+		
 }
 
 test {
 	useJUnitPlatform()
 }
 
-task cucumber() {
-    dependsOn assemble, compileTestJava
-    doLast {
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'Banking-Application', 'src/acceptance/resources']
+sourceSets {
+    acceptanceTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/acceptanceTest/java')
         }
+        resources.srcDir file('src/acceptanceTest/resources')
     }
+}
+
+task acceptanceTest(type: Test) {
+    testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
+    classpath = sourceSets.acceptanceTest.runtimeClasspath
 }
