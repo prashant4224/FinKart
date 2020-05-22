@@ -78,7 +78,7 @@ public class UserSteps extends SpringBootIntegrationTest {
 	public void user_gets_response_status(int status) throws Throwable {
 		log.info("jwtResponse.getStatusCode() {}", jwtResponse.getStatusCode());
 		
-		assertEquals(200, jwtResponse.getStatusCode());
+		assertEquals(status, jwtResponse.getStatusCode());
 	    
 	}
 
