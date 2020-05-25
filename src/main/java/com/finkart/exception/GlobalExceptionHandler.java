@@ -11,23 +11,24 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = DataNotFoundException.class)
 	public ResponseEntity<ErrorResponse> handleDataNotFoundException(DataNotFoundException ex) {
 		ErrorResponse resp = ex.getErrorResponse();
-		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(value = NameNotFoundException.class)
 	public ResponseEntity<ErrorResponse> handleNameNotFoundException(NameNotFoundException ex) {
 		ErrorResponse resp = ex.getErrorResponse();
-		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(value = UnauthorizedException.class)
 	public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException ex) {
 		ErrorResponse resp = ex.getErrorResponse();
-		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.OK);
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse(resp.getMessage(), resp.getStstusCode()), HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(value = Exception.class)
-	public ResponseEntity<ErrorResponse> handleException(Exception ex) {
-		return new ResponseEntity<ErrorResponse>(new ErrorResponse("Input data Invalid", "000"), HttpStatus.OK);
+	@ExceptionHandler(value = RuntimeException.class)
+	public ResponseEntity<ErrorResponse> handleException(RuntimeException ex) {
+		ex.getStackTrace();
+		return new ResponseEntity<ErrorResponse>(new ErrorResponse("Input data Invalid", "001"), HttpStatus.BAD_REQUEST);
 	}
 }

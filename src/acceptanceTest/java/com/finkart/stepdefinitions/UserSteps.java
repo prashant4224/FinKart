@@ -30,6 +30,7 @@ public class UserSteps extends SpringBootIntegrationTest {
 	JSONObject json;
 	
 	Response jwtResponse;
+	Response invalidResponse;
 	private final String URL = "http://localhost:8080/user/v1";
 	
 	Scenario scenario;
@@ -66,7 +67,6 @@ public class UserSteps extends SpringBootIntegrationTest {
 		log.info("request {}", request);
 		
 		jwtResponse = request.when().contentType(ContentType.JSON).body(payload).post("/create").then()
-	            .statusCode(200)
 	            .extract()
 	            .response(); 
 		
@@ -79,6 +79,67 @@ public class UserSteps extends SpringBootIntegrationTest {
 		log.info("jwtResponse.getStatusCode() {}", jwtResponse.getStatusCode());
 		
 		assertEquals(status, jwtResponse.getStatusCode());
+	    
+	}
+	
+	@Given("^User pass data$")
+	public void user_pass_data() throws Throwable {
+		
+		scenario.write("JSON data: ");
+		scenario.write(payload);
+	}
+
+	@When("^User calls GET method$")
+	public void user_calls_GET_method() throws Throwable {
+		jwtResponse = request.when().contentType(ContentType.JSON).get("/list").then()
+	            .statusCode(200)
+	            .extract()
+	            .response(); 
+		
+		scenario.write("Response Json");
+		scenario.write(jwtResponse.getBody().asString());
+	}
+
+	@Given("^User pass (\\d+) data$")
+	public void user_pass_data(int id) throws Throwable {
+		
+		scenario.write("JSON data: ");
+		//scenario.write(payload);
+	}
+	
+	@When("^User calls GET with (\\d+)$")
+	public void user_calls_GET_with(int id) throws Throwable {
+		jwtResponse = request.when().contentType(ContentType.JSON).get("/"+id).then()
+	            .statusCode(200)
+	            .extract()
+	            .response(); 
+		
+		scenario.write("Response Json");
+		scenario.write(jwtResponse.getBody().asString());
+	}
+	
+	@Given("^User pass (\\d+) invalid data$")
+	public void user_pass_invalid_data(int id) throws Throwable {
+		
+		scenario.write("JSON data: ");
+		scenario.write(String.valueOf(id));
+	}
+	
+	@When("^User calls GET with (\\d+) invalid record$")
+	public void user_calls_GET_with_invalid_record(int id) throws Throwable {
+		
+		invalidResponse = request.when().contentType(ContentType.JSON).get("/"+id).then().extract().response();
+		
+		scenario.write("Response Json");
+		scenario.write(invalidResponse.getBody().asString());
+	}
+	
+
+	@Then("^user gets invalid response status (\\d+)$")
+	public void user_gets_invalid_response_status(int status) throws Throwable {
+		log.info("invalidResponse.getStatusCode() {}", invalidResponse.getStatusCode());
+		
+		assertEquals(status, invalidResponse.getStatusCode());
 	    
 	}
 

@@ -38,8 +38,8 @@ public class UserService implements IUserService {
 	}
 
 	public User getUser(long id) {
-		long userId= getUserInfo();
-		return userRepository.getOne(userId);
+		//long userId= getUserInfo();
+		return userRepository.getOne(id);
 	}
 
 	public User updateUser(User cust) {

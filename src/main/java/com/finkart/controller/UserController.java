@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finkart.entity.User;
@@ -56,6 +57,7 @@ public class UserController {
 	 */
 	@PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User us = userService.createUser(user);
 		return new ResponseEntity<User>(us, HttpStatus.OK);
@@ -72,7 +74,7 @@ public class UserController {
 			produces=MediaType.APPLICATION_JSON_VALUE, headers="Accept=application/json")
 	public ResponseEntity<User> getUser(@PathVariable long id){
 		User cust = userService.getUser(id);
-		return new ResponseEntity<User>(cust, HttpStatus.OK);
+		return new ResponseEntity<>(cust, HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE, 
